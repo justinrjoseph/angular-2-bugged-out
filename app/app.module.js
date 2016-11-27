@@ -13,12 +13,16 @@ var platform_browser_1 = require('@angular/platform-browser');
 var bugs_module_1 = require('./bugs/bugs.module');
 var app_routing_module_1 = require('./app-routing.module');
 var app_component_1 = require('./app.component');
+var navbar_component_1 = require('./navbar/navbar.component');
 var AppModule = (function () {
     function AppModule() {
     }
     AppModule = __decorate([
         core_1.NgModule({
-            declarations: [app_component_1.AppComponent],
+            declarations: [
+                app_component_1.AppComponent,
+                navbar_component_1.NavbarComponent
+            ],
             imports: [
                 platform_browser_1.BrowserModule,
                 bugs_module_1.BugsModule,
