@@ -19,7 +19,8 @@ var BugsRoutingModule = (function () {
             imports: [
                 router_1.RouterModule.forRoot([
                     { path: '', redirectTo: 'bugs', pathMatch: 'full' },
-                    { path: 'bugs', component: bug_list_component_1.BugListComponent }
+                    { path: 'bugs', component: bug_list_component_1.BugListComponent },
+                    { path: '**', redirectTo: 'bugs' }
                 ])
             ],
             exports: [router_1.RouterModule]
