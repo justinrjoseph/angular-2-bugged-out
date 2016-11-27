@@ -9,24 +9,19 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var platform_browser_1 = require('@angular/platform-browser');
-var bugs_module_1 = require('./bugs/bugs.module');
-var app_component_1 = require('./app.component');
-var AppModule = (function () {
-    function AppModule() {
+var BugListComponent = (function () {
+    function BugListComponent() {
     }
-    AppModule = __decorate([
-        core_1.NgModule({
-            declarations: [app_component_1.AppComponent],
-            imports: [
-                platform_browser_1.BrowserModule,
-                bugs_module_1.BugsModule
-            ],
-            bootstrap: [app_component_1.AppComponent]
+    BugListComponent = __decorate([
+        core_1.Component({
+            moduleId: module.id,
+            selector: 'bug-list',
+            templateUrl: 'bug-list.component.html',
+            styleUrls: ['bug-list.component.css']
         }), 
         __metadata('design:paramtypes', [])
-    ], AppModule);
-    return AppModule;
+    ], BugListComponent);
+    return BugListComponent;
 }());
-exports.AppModule = AppModule;
-//# sourceMappingURL=app.module.js.map
+exports.BugListComponent = BugListComponent;
+//# sourceMappingURL=bug-list.component.js.map
