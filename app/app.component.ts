@@ -1,10 +1,10 @@
- import { Component } from '@angular/core';
+import { Component } from '@angular/core';
 
- @Component({
+@Component({
     selector: 'my-app',
     template: `
         <navbar></navbar>
-
+    
         <div class="container">
             <router-outlet></router-outlet>
         </div>
@@ -14,5 +14,5 @@
             margin-top: 5rem;
         }
     `]
- })
- export class AppComponent {}
+})
+export class AppComponent {}
