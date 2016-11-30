@@ -4,6 +4,8 @@ import { FirebaseConfigService } from '../../core/services/firebase-config.servi
 
 import { Observable } from 'rxjs/Observable';
 
+import { Bug } from '../models/bug';
+
 @Injectable()
 export class BugsService {
     private _bugsDatabase = this._firebaseConfigService.database.ref('/bugs'); 
@@ -13,8 +15,12 @@ export class BugsService {
     getAddedBugs() : Observable<any> {
         return Observable.create(observable => {
             this._bugsDatabase.on('child_added',
-            bug => { observable.next(bug.val()); },
-            error => { observable.throw(error) })
+                bug => {
+                    const newBug = bug.val() as Bug 
+                    observable.next(newBug);
+                },
+                error => { observable.throw(error) }
+            );
         });
     }
 }

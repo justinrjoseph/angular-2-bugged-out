@@ -13,13 +13,20 @@ var bugs_service_1 = require('../services/bugs.service');
 var BugListComponent = (function () {
     function BugListComponent(_bugsService) {
         this._bugsService = _bugsService;
+        this._bugs = [];
     }
     BugListComponent.prototype.ngOnInit = function () {
         this.getAddedBugs();
     };
     BugListComponent.prototype.getAddedBugs = function () {
+        var _this = this;
         this._bugsService.getAddedBugs()
-            .subscribe(function (bug) { return console.log(bug); }, function (error) { return console.error('Unable to retrieve added bug: ', error); });
+            .subscribe(function (bug) {
+            _this._bugs.push(bug);
+            console.log(_this._bugs);
+        }, function (error) {
+            console.error('Unable to retrieve added bug: ', error);
+        });
     };
     BugListComponent = __decorate([
         core_1.Component({
