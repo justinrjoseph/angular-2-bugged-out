@@ -4,11 +4,15 @@ import { SharedModule } from '../shared/shared.module';
 import { BugsRoutingModule } from './bugs-routing.module'; 
 
 import { BugListComponent } from './bug-list/bug-list.component';
+import { BugDetailsComponent } from './bug-details/bug-details.component';
 
 import { BugsService } from './services/bugs.service';
 
 @NgModule({
-	declarations: [ BugListComponent ],
+	declarations: [
+		BugListComponent,
+		BugDetailsComponent
+	],
 	imports: [
 		SharedModule,
 		BugsRoutingModule
