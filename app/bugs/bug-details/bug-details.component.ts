@@ -7,5 +7,5 @@ import { Component } from '@angular/core';
     styleUrls: ['bug-details.component.css']
 })
 export class BugDetailsComponent {
-
+    private _modalId = "bugModal";
 }

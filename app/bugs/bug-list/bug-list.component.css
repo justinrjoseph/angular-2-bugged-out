@@ -7,6 +7,10 @@ thead th {
 	border-bottom: 1px solid #34434b;
 }
 
+tbody tr {
+	cursor: pointer;
+}
+
 th, td {
 	font-weight: lighter;
 }
