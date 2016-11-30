@@ -12,16 +12,18 @@ var core_1 = require('@angular/core');
 var shared_module_1 = require('../shared/shared.module');
 var bugs_routing_module_1 = require('./bugs-routing.module');
 var bug_list_component_1 = require('./bug-list/bug-list.component');
+var bugs_service_1 = require('./services/bugs.service');
 var BugsModule = (function () {
     function BugsModule() {
     }
     BugsModule = __decorate([
         core_1.NgModule({
+            declarations: [bug_list_component_1.BugListComponent],
             imports: [
                 shared_module_1.SharedModule,
                 bugs_routing_module_1.BugsRoutingModule
             ],
-            declarations: [bug_list_component_1.BugListComponent]
+            providers: [bugs_service_1.BugsService]
         }), 
         __metadata('design:paramtypes', [])
     ], BugsModule);
