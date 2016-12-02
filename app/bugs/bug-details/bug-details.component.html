@@ -1,13 +1,47 @@
 <div class="modal fade" [id]="_modalId">
 	<div class="modal-dialog modal-lg" role="document">
 		<div class="modal-content">
-			<div class="modal-body">
-				<p>Bug Details</p>
-			</div>
+			<form>
+				<div class="modal-body">
+					<fieldset class="form-inline">
+						<div class="form-group" id="title-form-group">
+							<label for="title" class="sr-only">Title</label>
+							<input type="text" class="form-control" id="title" placeholder="Bug title">
+						</div>
 
-			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Add Bug</button>
-			</div>
+						<div class="form-group float-xs-right">
+							<label for="status" class="sr-only">Status</label>
+							<select id="status" class="form-control btn btn-primary">
+								<option value="1">Logged</option>
+								<option value="2">Recreated</option>
+								<option value="3">In Progress</option>
+								<option value="4">Fixed</option>
+								<option value="5">Declined</option>
+							</select>
+						</div>
+					</fieldset>
+
+					<div class="form-group float-xs-left" id="severity-form-group">
+						<label for="severity" class="sr-only">Severity</label>
+						<select id="severity" class="form-control">
+							<option value="1">Severe</option>
+							<option value="2">Medium</option>
+							<option value="3">Low</option>
+							<option value="4">Cosmetic</option>
+						</select>
+					</div>
+
+					<div class="form-group">
+						<label for="description" class="sr-only">Description</label>
+						<textarea id="description" rows="10" class="form-control" placeholder="Bug description"></textarea>
+					</div>
+				</div>
+
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary btn-xl" data-dismiss="modal">Cancel</button>
+					<button type="submit" class="btn btn-success btn-xl" data-dismiss="modal">Save</button>
+				</div>
+			</form>
 		</div>
 	</div>
 </div>
