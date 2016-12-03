@@ -12,18 +12,25 @@ var core_1 = require('@angular/core');
 var forms_1 = require('@angular/forms');
 var forbidden_string_validator_1 = require('../../shared/validation/forbidden-string.validator');
 var BugDetailsComponent = (function () {
-    function BugDetailsComponent() {
+    function BugDetailsComponent(_fb) {
+        this._fb = _fb;
         this._modalId = "bugModal";
     }
     BugDetailsComponent.prototype.ngOnInit = function () {
         this.configureForm();
     };
     BugDetailsComponent.prototype.configureForm = function () {
-        this._bugForm = new forms_1.FormGroup({
-            title: new forms_1.FormControl(null, [forms_1.Validators.required, forbidden_string_validator_1.forbiddenStringValidator(/puppy/i)]),
-            status: new forms_1.FormControl(1, forms_1.Validators.required),
-            severity: new forms_1.FormControl(1, forms_1.Validators.required),
-            description: new forms_1.FormControl(null, forms_1.Validators.required)
+        // this._bugForm = new FormGroup({
+        //     title: new FormControl(null, [Validators.required, forbiddenStringValidator(/puppy/i)]),
+        //     status: new FormControl(1, Validators.required),
+        //     severity: new FormControl(1, Validators.required),
+        //     description: new FormControl(null, Validators.required)
+        // });
+        this._bugForm = this._fb.group({
+            title: [null, [forms_1.Validators.required, forbidden_string_validator_1.forbiddenStringValidator(/puppy/i)]],
+            status: [1, forms_1.Validators.required],
+            severity: [1, forms_1.Validators.required],
+            description: [null, forms_1.Validators.required]
         });
     };
     BugDetailsComponent.prototype.submitForm = function () {
@@ -36,7 +43,7 @@ var BugDetailsComponent = (function () {
             templateUrl: 'bug-details.component.html',
             styleUrls: ['bug-details.component.css']
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [forms_1.FormBuilder])
     ], BugDetailsComponent);
     return BugDetailsComponent;
 }());

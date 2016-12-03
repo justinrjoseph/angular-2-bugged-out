@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 
 import { forbiddenStringValidator } from '../../shared/validation/forbidden-string.validator';
 
@@ -14,16 +14,25 @@ export class BugDetailsComponent implements OnInit {
     private _modalId = "bugModal";
     private _bugForm: FormGroup;
 
+    constructor(private _fb: FormBuilder) {}
+
     ngOnInit() {
         this.configureForm();
     }
 
     configureForm() {
-        this._bugForm = new FormGroup({
-            title: new FormControl(null, [Validators.required, forbiddenStringValidator(/puppy/i)]),
-            status: new FormControl(1, Validators.required),
-            severity: new FormControl(1, Validators.required),
-            description: new FormControl(null, Validators.required)
+        // this._bugForm = new FormGroup({
+        //     title: new FormControl(null, [Validators.required, forbiddenStringValidator(/puppy/i)]),
+        //     status: new FormControl(1, Validators.required),
+        //     severity: new FormControl(1, Validators.required),
+        //     description: new FormControl(null, Validators.required)
+        // });
+
+        this._bugForm = this._fb.group({
+            title: [null, [Validators.required, forbiddenStringValidator(/puppy/i)]],
+            status: [1, Validators.required],
+            severity: [1, Validators.required],
+            description: [null, Validators.required]
         });
     }
 
