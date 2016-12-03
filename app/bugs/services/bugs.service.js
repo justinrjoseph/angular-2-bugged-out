@@ -25,6 +25,17 @@ var BugsService = (function () {
             }, function (error) { observable.throw(error); });
         });
     };
+    BugsService.prototype.addBug = function (bug) {
+        var newBugRef = this._bugsDatabase.push();
+        newBugRef.set({
+            title: bug.title,
+            status: bug.status,
+            severity: bug.severity,
+            description: bug.description,
+            createdBy: 'Justin',
+            createdDate: Date.now()
+        }, function (error) { return console.error('Unable to add bug to Firebase: ', error); });
+    };
     BugsService = __decorate([
         core_1.Injectable(), 
         __metadata('design:paramtypes', [firebase_config_service_1.FirebaseConfigService])
