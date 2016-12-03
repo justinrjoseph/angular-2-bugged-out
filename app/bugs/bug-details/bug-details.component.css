@@ -35,3 +35,14 @@
   text-align: center;
   padding-bottom: 4rem;
 }
+
+textarea.ng-invalid.ng-dirty {
+  border-color: #c62828;
+  transition: border-color .2s ease;
+}
+
+#title.ng-invalid.ng-dirty {
+  border-left: 5px solid #c62828;
+  padding-left: 5px;
+  transition: border-width .2 ease;
+}
