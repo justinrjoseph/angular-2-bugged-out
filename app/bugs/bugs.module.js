@@ -9,6 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var forms_1 = require('@angular/forms');
 var shared_module_1 = require('../shared/shared.module');
 var bugs_routing_module_1 = require('./bugs-routing.module');
 var bug_list_component_1 = require('./bug-list/bug-list.component');
@@ -19,13 +20,14 @@ var BugsModule = (function () {
     }
     BugsModule = __decorate([
         core_1.NgModule({
+            imports: [
+                forms_1.ReactiveFormsModule,
+                shared_module_1.SharedModule,
+                bugs_routing_module_1.BugsRoutingModule
+            ],
             declarations: [
                 bug_list_component_1.BugListComponent,
                 bug_details_component_1.BugDetailsComponent
-            ],
-            imports: [
-                shared_module_1.SharedModule,
-                bugs_routing_module_1.BugsRoutingModule
             ],
             providers: [bugs_service_1.BugsService]
         }), 

@@ -9,10 +9,25 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var forms_1 = require('@angular/forms');
 var BugDetailsComponent = (function () {
     function BugDetailsComponent() {
         this._modalId = "bugModal";
     }
+    BugDetailsComponent.prototype.ngOnInit = function () {
+        this.configureForm();
+    };
+    BugDetailsComponent.prototype.configureForm = function () {
+        this._bugForm = new forms_1.FormGroup({
+            title: new forms_1.FormControl(),
+            status: new forms_1.FormControl(1),
+            severity: new forms_1.FormControl(1),
+            description: new forms_1.FormControl()
+        });
+    };
+    BugDetailsComponent.prototype.submitForm = function () {
+        console.log(this._bugForm);
+    };
     BugDetailsComponent = __decorate([
         core_1.Component({
             moduleId: module.id,

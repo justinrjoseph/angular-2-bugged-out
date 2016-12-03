@@ -8,15 +8,15 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        NavbarComponent
-    ],
     imports: [
         BrowserModule,
         CoreModule.forRoot(),
         BugsModule,
         AppRoutingModule
+    ],
+    declarations: [
+        AppComponent,
+        NavbarComponent
     ],
     bootstrap: [ AppComponent ]
 })
