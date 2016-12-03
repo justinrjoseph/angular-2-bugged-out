@@ -47,6 +47,7 @@ var BugDetailsComponent = (function () {
         this.bug.severity = this._bugForm.value.severity;
         this.bug.description = this._bugForm.value.description;
         this._bugsService.addBug(this.bug);
+        this._bugForm.reset({ status: 1, severity: 1 });
     };
     __decorate([
         core_1.Input(), 
