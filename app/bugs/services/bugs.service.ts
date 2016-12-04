@@ -39,9 +39,21 @@ export class BugsService {
         );
     }
 
+    changedListener() : Observable<any> {
+        return Observable.create(observable => {
+            this._bugsDatabase.on('child_changed',
+            bug => {
+                const updatedBug = bug.val() as Bug;
+                updatedBug.id = bug.key;
+                observable.next(updatedBug);
+            },
+            error => { observable.throw(error) });
+        });
+    }
+
     updateBug(bug: Bug) {
         const currentBugRef = this._bugsDatabase.child(bug.id);
-        
+
         bug.id = null;
         bug.updatedBy = 'Christine';
         bug.updatedDate = Date.now();

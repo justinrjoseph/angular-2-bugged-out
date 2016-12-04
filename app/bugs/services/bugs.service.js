@@ -37,6 +37,16 @@ var BugsService = (function () {
             createdDate: Date.now()
         }).catch(function (error) { return console.error('Unable to add bug to Firebase: ', error); });
     };
+    BugsService.prototype.changedListener = function () {
+        var _this = this;
+        return Observable_1.Observable.create(function (observable) {
+            _this._bugsDatabase.on('child_changed', function (bug) {
+                var updatedBug = bug.val();
+                updatedBug.id = bug.key;
+                observable.next(updatedBug);
+            }, function (error) { observable.throw(error); });
+        });
+    };
     BugsService.prototype.updateBug = function (bug) {
         var currentBugRef = this._bugsDatabase.child(bug.id);
         bug.id = null;
