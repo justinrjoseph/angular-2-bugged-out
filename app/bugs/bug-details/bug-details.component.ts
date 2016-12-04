@@ -4,6 +4,8 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
 
 import { Bug } from '../models/bug';
 
+import { STATUSES, SEVERITIES } from '../../shared/constants/constants';
+
 import { BugsService } from '../services/bugs.service';
 
 import { forbiddenStringValidator } from '../../shared/validation/forbidden-string.validator';
@@ -17,6 +19,11 @@ import { forbiddenStringValidator } from '../../shared/validation/forbidden-stri
 export class BugDetailsComponent implements OnInit {
     private _modalId = "bugModal";
     private _bugForm: FormGroup;
+    private _statuses = STATUSES;
+    private _statusesArr: string[] = [];
+    private _severities = SEVERITIES;
+    private _severitiesArr: string[] = [];
+
     @Input() bug: Bug = this.newBug();
 
     constructor(
@@ -25,6 +32,8 @@ export class BugDetailsComponent implements OnInit {
     ) {}
 
     ngOnInit() {
+        this._statusesArr = Object.keys(this._statuses).filter(Number);
+        this._severitiesArr = Object.keys(this._severities).filter(Number);
         this.configureForm();
     }
 
@@ -33,8 +42,8 @@ export class BugDetailsComponent implements OnInit {
             null,
             null,
             null,
-            1,
-            1,
+            this._statuses.Logged,
+            this._severities.Low,
             null,
             null,
             null,
@@ -95,7 +104,11 @@ export class BugDetailsComponent implements OnInit {
     }
 
     resetForm() {
-        this._bugForm.reset({ status: 1, severity : 1 });
+        this._bugForm.reset({
+            status: this._statuses.Logged,
+            severity: this._severities.Low
+        });
+
         this.resetBug(); 
     }
 

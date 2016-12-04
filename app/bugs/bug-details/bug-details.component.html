@@ -17,11 +17,7 @@
 						<div class="form-group float-xs-right">
 							<label for="status" class="sr-only">Status</label>
 							<select id="status" class="form-control btn btn-primary" formControlName="status">
-								<option value="1">Logged</option>
-								<option value="2">Recreated</option>
-								<option value="3">In Progress</option>
-								<option value="4">Fixed</option>
-								<option value="5">Declined</option>
+								<option *ngFor="let status of _statusesArr" [value]="status">{{ _statuses[status] }}</option>
 							</select>
 						</div>
 					</fieldset>
@@ -29,10 +25,7 @@
 					<div class="form-group float-xs-left" id="severity-form-group">
 						<label for="severity" class="sr-only">Severity</label>
 						<select id="severity" class="form-control" formControlName="severity">
-							<option value="1">Severe</option>
-							<option value="2">Medium</option>
-							<option value="3">Low</option>
-							<option value="4">Cosmetic</option>
+							<option *ngFor="let severity of _severitiesArr" [value]="severity">{{ _severities[severity] }}</option>
 						</select>
 					</div>
 

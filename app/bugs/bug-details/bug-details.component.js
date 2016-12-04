@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var forms_1 = require('@angular/forms');
 var bug_1 = require('../models/bug');
+var constants_1 = require('../../shared/constants/constants');
 var bugs_service_1 = require('../services/bugs.service');
 var forbidden_string_validator_1 = require('../../shared/validation/forbidden-string.validator');
 var BugDetailsComponent = (function () {
@@ -18,13 +19,19 @@ var BugDetailsComponent = (function () {
         this._fb = _fb;
         this._bugsService = _bugsService;
         this._modalId = "bugModal";
+        this._statuses = constants_1.STATUSES;
+        this._statusesArr = [];
+        this._severities = constants_1.SEVERITIES;
+        this._severitiesArr = [];
         this.bug = this.newBug();
     }
     BugDetailsComponent.prototype.ngOnInit = function () {
+        this._statusesArr = Object.keys(this._statuses).filter(Number);
+        this._severitiesArr = Object.keys(this._severities).filter(Number);
         this.configureForm();
     };
     BugDetailsComponent.prototype.newBug = function () {
-        return new bug_1.Bug(null, null, null, 1, 1, null, null, null, null);
+        return new bug_1.Bug(null, null, null, this._statuses.Logged, this._severities.Low, null, null, null, null);
     };
     BugDetailsComponent.prototype.configureForm = function (bug) {
         // this._bugForm = new FormGroup({
@@ -63,7 +70,10 @@ var BugDetailsComponent = (function () {
         this._bugsService.updateBug(this.bug);
     };
     BugDetailsComponent.prototype.resetForm = function () {
-        this._bugForm.reset({ status: 1, severity: 1 });
+        this._bugForm.reset({
+            status: this._statuses.Logged,
+            severity: this._severities.Low
+        });
         this.resetBug();
     };
     BugDetailsComponent.prototype.resetBug = function () {

@@ -8,9 +8,9 @@
 })(exports.STATUSES || (exports.STATUSES = {}));
 var STATUSES = exports.STATUSES;
 (function (SEVERITIES) {
-    SEVERITIES[SEVERITIES['Low'] = 1] = 'Low';
+    SEVERITIES[SEVERITIES['Severe'] = 1] = 'Severe';
     SEVERITIES[SEVERITIES['Medium'] = 2] = 'Medium';
-    SEVERITIES[SEVERITIES['Severe'] = 3] = 'Severe';
+    SEVERITIES[SEVERITIES['Low'] = 3] = 'Low';
     SEVERITIES[SEVERITIES['Cosmetic'] = 4] = 'Cosmetic';
 })(exports.SEVERITIES || (exports.SEVERITIES = {}));
 var SEVERITIES = exports.SEVERITIES;
