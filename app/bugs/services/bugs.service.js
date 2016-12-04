@@ -21,6 +21,7 @@ var BugsService = (function () {
         return Observable_1.Observable.create(function (observable) {
             _this._bugsDatabase.on('child_added', function (bug) {
                 var newBug = bug.val();
+                newBug.id = bug.key;
                 observable.next(newBug);
             }, function (error) { observable.throw(error); });
         });
@@ -35,6 +36,13 @@ var BugsService = (function () {
             createdBy: 'Justin',
             createdDate: Date.now()
         }).catch(function (error) { return console.error('Unable to add bug to Firebase: ', error); });
+    };
+    BugsService.prototype.updateBug = function (bug) {
+        var currentBugRef = this._bugsDatabase.child(bug.id);
+        bug.id = null;
+        bug.updatedBy = 'Christine';
+        bug.updatedDate = Date.now();
+        currentBugRef.update(bug);
     };
     BugsService = __decorate([
         core_1.Injectable(), 

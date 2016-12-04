@@ -34,7 +34,7 @@ var BugDetailsComponent = (function () {
         //     description: new FormControl(null, Validators.required)
         // });
         if (bug) {
-            this.bug = bug;
+            this.bug = new bug_1.Bug(bug.id, bug.title, bug.description, bug.status, bug.severity, bug.createdBy, bug.createdDate, bug.updatedBy, bug.updatedDate);
         }
         this._bugForm = this._fb.group({
             title: [this.bug.title, [forms_1.Validators.required, forbidden_string_validator_1.forbiddenStringValidator(/puppy/i)]],
@@ -44,16 +44,23 @@ var BugDetailsComponent = (function () {
         });
     };
     BugDetailsComponent.prototype.submitForm = function () {
-        console.log(this._bugForm);
-        this.addBug();
-    };
-    BugDetailsComponent.prototype.addBug = function () {
         this.bug.title = this._bugForm.value.title;
         this.bug.status = this._bugForm.value.status;
         this.bug.severity = this._bugForm.value.severity;
         this.bug.description = this._bugForm.value.description;
-        this._bugsService.addBug(this.bug);
+        if (this.bug.id) {
+            this.updateBug();
+        }
+        else {
+            this.addBug();
+        }
         this.resetForm();
+    };
+    BugDetailsComponent.prototype.addBug = function () {
+        this._bugsService.addBug(this.bug);
+    };
+    BugDetailsComponent.prototype.updateBug = function () {
+        this._bugsService.updateBug(this.bug);
     };
     BugDetailsComponent.prototype.resetForm = function () {
         this._bugForm.reset({ status: 1, severity: 1 });

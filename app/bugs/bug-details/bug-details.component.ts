@@ -50,7 +50,17 @@ export class BugDetailsComponent implements OnInit {
         //     description: new FormControl(null, Validators.required)
         // });
         if ( bug ) {
-            this.bug = bug;
+            this.bug = new Bug(
+                bug.id,
+                bug.title,
+                bug.description,
+                bug.status,
+                bug.severity,
+                bug.createdBy,
+                bug.createdDate,
+                bug.updatedBy,
+                bug.updatedDate
+            );
         }
         
         this._bugForm = this._fb.group({
@@ -62,18 +72,26 @@ export class BugDetailsComponent implements OnInit {
     }
 
     submitForm() {
-         console.log(this._bugForm);
-         this.addBug();
-    }
-
-    addBug() {
         this.bug.title = this._bugForm.value.title;
         this.bug.status = this._bugForm.value.status;
         this.bug.severity = this._bugForm.value.severity;
         this.bug.description = this._bugForm.value.description;
+        
+        if ( this.bug.id ) {
+            this.updateBug();
+        } else {
+            this.addBug();
+        }
 
-        this._bugsService.addBug(this.bug);
         this.resetForm();
+    }
+
+    addBug() {
+        this._bugsService.addBug(this.bug);
+    }
+
+    updateBug() {
+        this._bugsService.updateBug(this.bug);
     }
 
     resetForm() {
