@@ -53,7 +53,8 @@
 						type="submit"
 						class="btn btn-success btn-xl"
 						data-dismiss="modal"
-						(click)="submitForm()">
+						(click)="submitForm()"
+						[disabled]="_bugForm.invalid">
 						Save
 					</button>
 				</div>

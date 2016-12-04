@@ -91,8 +91,6 @@ export class BugDetailsComponent implements OnInit {
         } else {
             this.addBug();
         }
-
-        this.resetForm();
     }
 
     addBug() {

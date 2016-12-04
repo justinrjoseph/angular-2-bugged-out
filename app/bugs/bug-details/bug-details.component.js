@@ -61,7 +61,6 @@ var BugDetailsComponent = (function () {
         else {
             this.addBug();
         }
-        this.resetForm();
     };
     BugDetailsComponent.prototype.addBug = function () {
         this._bugsService.addBug(this.bug);
