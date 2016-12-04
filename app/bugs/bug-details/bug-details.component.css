@@ -16,6 +16,10 @@
   text-transform: uppercase;
 }
 
+#status {
+  text-align-last: center; 
+}
+
 #title, #severity {
   padding: 0;
 }

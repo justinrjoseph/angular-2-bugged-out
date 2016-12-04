@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 
@@ -24,7 +24,7 @@ export class BugDetailsComponent implements OnInit {
     private _severities = SEVERITIES;
     private _severitiesArr: string[] = [];
 
-    @Input() bug: Bug = this.newBug();
+    private _bug: Bug = this.newBug();
 
     constructor(
         private _fb: FormBuilder,
@@ -53,13 +53,13 @@ export class BugDetailsComponent implements OnInit {
 
     configureForm(bug?: Bug) {
         // this._bugForm = new FormGroup({
-        //     title: new FormControl(null, [Validators.required, forbiddenStringValidator(/puppy/i)]),
-        //     status: new FormControl(1, Validators.required),
-        //     severity: new FormControl(1, Validators.required),
-        //     description: new FormControl(null, Validators.required)
+        //     title: new FormControl(this.bug.title, [Validators.required, forbiddenStringValidator(/puppy/i)]),
+        //     status: new FormControl(this.bug.status, Validators.required),
+        //     severity: new FormControl(this.bug.severity, Validators.required),
+        //     description: new FormControl(this.bug.description, Validators.required)
         // });
         if ( bug ) {
-            this.bug = new Bug(
+            this._bug = new Bug(
                 bug.id,
                 bug.title,
                 bug.description,
@@ -73,20 +73,20 @@ export class BugDetailsComponent implements OnInit {
         }
         
         this._bugForm = this._fb.group({
-            title: [this.bug.title, [Validators.required, forbiddenStringValidator(/puppy/i)]],
-            status: [this.bug.status, Validators.required],
-            severity: [this.bug.severity, Validators.required],
-            description: [this.bug.description, Validators.required]
+            title: [this._bug.title, [Validators.required, forbiddenStringValidator(/puppy/i)]],
+            status: [this._bug.status, Validators.required],
+            severity: [this._bug.severity, Validators.required],
+            description: [this._bug.description, Validators.required]
         });
     }
 
     submitForm() {
-        this.bug.title = this._bugForm.value.title;
-        this.bug.status = this._bugForm.value.status;
-        this.bug.severity = this._bugForm.value.severity;
-        this.bug.description = this._bugForm.value.description;
+        this._bug.title = this._bugForm.value.title;
+        this._bug.status = this._bugForm.value.status;
+        this._bug.severity = this._bugForm.value.severity;
+        this._bug.description = this._bugForm.value.description;
         
-        if ( this.bug.id ) {
+        if ( this._bug.id ) {
             this.updateBug();
         } else {
             this.addBug();
@@ -94,11 +94,11 @@ export class BugDetailsComponent implements OnInit {
     }
 
     addBug() {
-        this._bugsService.addBug(this.bug);
+        this._bugsService.addBug(this._bug);
     }
 
     updateBug() {
-        this._bugsService.updateBug(this.bug);
+        this._bugsService.updateBug(this._bug);
     }
 
     resetForm() {
@@ -111,6 +111,6 @@ export class BugDetailsComponent implements OnInit {
     }
 
     resetBug() {
-        this.bug = this.newBug();
+        this._bug = this.newBug();
     }
 }

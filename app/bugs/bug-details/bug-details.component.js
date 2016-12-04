@@ -23,7 +23,7 @@ var BugDetailsComponent = (function () {
         this._statusesArr = [];
         this._severities = constants_1.SEVERITIES;
         this._severitiesArr = [];
-        this.bug = this.newBug();
+        this._bug = this.newBug();
     }
     BugDetailsComponent.prototype.ngOnInit = function () {
         this._statusesArr = Object.keys(this._statuses).filter(Number);
@@ -35,27 +35,27 @@ var BugDetailsComponent = (function () {
     };
     BugDetailsComponent.prototype.configureForm = function (bug) {
         // this._bugForm = new FormGroup({
-        //     title: new FormControl(null, [Validators.required, forbiddenStringValidator(/puppy/i)]),
-        //     status: new FormControl(1, Validators.required),
-        //     severity: new FormControl(1, Validators.required),
-        //     description: new FormControl(null, Validators.required)
+        //     title: new FormControl(this.bug.title, [Validators.required, forbiddenStringValidator(/puppy/i)]),
+        //     status: new FormControl(this.bug.status, Validators.required),
+        //     severity: new FormControl(this.bug.severity, Validators.required),
+        //     description: new FormControl(this.bug.description, Validators.required)
         // });
         if (bug) {
-            this.bug = new bug_1.Bug(bug.id, bug.title, bug.description, bug.status, bug.severity, bug.createdBy, bug.createdDate, bug.updatedBy, bug.updatedDate);
+            this._bug = new bug_1.Bug(bug.id, bug.title, bug.description, bug.status, bug.severity, bug.createdBy, bug.createdDate, bug.updatedBy, bug.updatedDate);
         }
         this._bugForm = this._fb.group({
-            title: [this.bug.title, [forms_1.Validators.required, forbidden_string_validator_1.forbiddenStringValidator(/puppy/i)]],
-            status: [this.bug.status, forms_1.Validators.required],
-            severity: [this.bug.severity, forms_1.Validators.required],
-            description: [this.bug.description, forms_1.Validators.required]
+            title: [this._bug.title, [forms_1.Validators.required, forbidden_string_validator_1.forbiddenStringValidator(/puppy/i)]],
+            status: [this._bug.status, forms_1.Validators.required],
+            severity: [this._bug.severity, forms_1.Validators.required],
+            description: [this._bug.description, forms_1.Validators.required]
         });
     };
     BugDetailsComponent.prototype.submitForm = function () {
-        this.bug.title = this._bugForm.value.title;
-        this.bug.status = this._bugForm.value.status;
-        this.bug.severity = this._bugForm.value.severity;
-        this.bug.description = this._bugForm.value.description;
-        if (this.bug.id) {
+        this._bug.title = this._bugForm.value.title;
+        this._bug.status = this._bugForm.value.status;
+        this._bug.severity = this._bugForm.value.severity;
+        this._bug.description = this._bugForm.value.description;
+        if (this._bug.id) {
             this.updateBug();
         }
         else {
@@ -63,10 +63,10 @@ var BugDetailsComponent = (function () {
         }
     };
     BugDetailsComponent.prototype.addBug = function () {
-        this._bugsService.addBug(this.bug);
+        this._bugsService.addBug(this._bug);
     };
     BugDetailsComponent.prototype.updateBug = function () {
-        this._bugsService.updateBug(this.bug);
+        this._bugsService.updateBug(this._bug);
     };
     BugDetailsComponent.prototype.resetForm = function () {
         this._bugForm.reset({
@@ -76,12 +76,8 @@ var BugDetailsComponent = (function () {
         this.resetBug();
     };
     BugDetailsComponent.prototype.resetBug = function () {
-        this.bug = this.newBug();
+        this._bug = this.newBug();
     };
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', bug_1.Bug)
-    ], BugDetailsComponent.prototype, "bug", void 0);
     BugDetailsComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
