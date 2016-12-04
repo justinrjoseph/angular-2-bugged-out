@@ -17,6 +17,7 @@ var BugListComponent = (function () {
     }
     BugListComponent.prototype.ngOnInit = function () {
         this.getAddedBugs();
+        this.getUpdatedBugs();
     };
     BugListComponent.prototype.getAddedBugs = function () {
         var _this = this;
@@ -26,6 +27,14 @@ var BugListComponent = (function () {
         }, function (error) {
             console.error('Unable to retrieve added bug: ', error);
         });
+    };
+    BugListComponent.prototype.getUpdatedBugs = function () {
+        var _this = this;
+        this._bugsService.changedListener()
+            .subscribe(function (updatedBug) {
+            var bugIndex = _this._bugs.map(function (index) { return index.id; }).indexOf(updatedBug.id);
+            _this._bugs[bugIndex] = updatedBug;
+        }, function (error) { return console.error('Unable to get updated bug: ', error); });
     };
     BugListComponent = __decorate([
         core_1.Component({
