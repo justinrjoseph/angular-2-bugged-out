@@ -23,7 +23,6 @@ var BugListComponent = (function () {
         this._bugsService.getAddedBugs()
             .subscribe(function (bug) {
             _this._bugs.push(bug);
-            console.log(_this._bugs);
         }, function (error) {
             console.error('Unable to retrieve added bug: ', error);
         });

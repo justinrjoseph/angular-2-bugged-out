@@ -18,23 +18,29 @@ var BugDetailsComponent = (function () {
         this._fb = _fb;
         this._bugsService = _bugsService;
         this._modalId = "bugModal";
-        this.bug = new bug_1.Bug(null, null, null, null, null, null, null, null, null);
+        this.bug = this.newBug();
     }
     BugDetailsComponent.prototype.ngOnInit = function () {
         this.configureForm();
     };
-    BugDetailsComponent.prototype.configureForm = function () {
+    BugDetailsComponent.prototype.newBug = function () {
+        return new bug_1.Bug(null, null, null, 1, 1, null, null, null, null);
+    };
+    BugDetailsComponent.prototype.configureForm = function (bug) {
         // this._bugForm = new FormGroup({
         //     title: new FormControl(null, [Validators.required, forbiddenStringValidator(/puppy/i)]),
         //     status: new FormControl(1, Validators.required),
         //     severity: new FormControl(1, Validators.required),
         //     description: new FormControl(null, Validators.required)
         // });
+        if (bug) {
+            this.bug = bug;
+        }
         this._bugForm = this._fb.group({
-            title: [null, [forms_1.Validators.required, forbidden_string_validator_1.forbiddenStringValidator(/puppy/i)]],
-            status: [1, forms_1.Validators.required],
-            severity: [1, forms_1.Validators.required],
-            description: [null, forms_1.Validators.required]
+            title: [this.bug.title, [forms_1.Validators.required, forbidden_string_validator_1.forbiddenStringValidator(/puppy/i)]],
+            status: [this.bug.status, forms_1.Validators.required],
+            severity: [this.bug.severity, forms_1.Validators.required],
+            description: [this.bug.description, forms_1.Validators.required]
         });
     };
     BugDetailsComponent.prototype.submitForm = function () {
@@ -47,7 +53,14 @@ var BugDetailsComponent = (function () {
         this.bug.severity = this._bugForm.value.severity;
         this.bug.description = this._bugForm.value.description;
         this._bugsService.addBug(this.bug);
+        this.resetForm();
+    };
+    BugDetailsComponent.prototype.resetForm = function () {
         this._bugForm.reset({ status: 1, severity: 1 });
+        this.resetBug();
+    };
+    BugDetailsComponent.prototype.resetBug = function () {
+        this.bug = this.newBug();
     };
     __decorate([
         core_1.Input(), 

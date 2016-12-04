@@ -17,7 +17,7 @@ import { forbiddenStringValidator } from '../../shared/validation/forbidden-stri
 export class BugDetailsComponent implements OnInit {
     private _modalId = "bugModal";
     private _bugForm: FormGroup;
-    @Input() bug: Bug = new Bug(null, null, null, null, null, null, null, null, null);
+    @Input() bug: Bug = this.newBug();
 
     constructor(
         private _fb: FormBuilder,
@@ -28,19 +28,36 @@ export class BugDetailsComponent implements OnInit {
         this.configureForm();
     }
 
-    configureForm() {
+    newBug() {
+        return new Bug(
+            null,
+            null,
+            null,
+            1,
+            1,
+            null,
+            null,
+            null,
+            null
+        );
+    }
+
+    configureForm(bug?: Bug) {
         // this._bugForm = new FormGroup({
         //     title: new FormControl(null, [Validators.required, forbiddenStringValidator(/puppy/i)]),
         //     status: new FormControl(1, Validators.required),
         //     severity: new FormControl(1, Validators.required),
         //     description: new FormControl(null, Validators.required)
         // });
-
+        if ( bug ) {
+            this.bug = bug;
+        }
+        
         this._bugForm = this._fb.group({
-            title: [null, [Validators.required, forbiddenStringValidator(/puppy/i)]],
-            status: [1, Validators.required],
-            severity: [1, Validators.required],
-            description: [null, Validators.required]
+            title: [this.bug.title, [Validators.required, forbiddenStringValidator(/puppy/i)]],
+            status: [this.bug.status, Validators.required],
+            severity: [this.bug.severity, Validators.required],
+            description: [this.bug.description, Validators.required]
         });
     }
 
@@ -56,7 +73,15 @@ export class BugDetailsComponent implements OnInit {
         this.bug.description = this._bugForm.value.description;
 
         this._bugsService.addBug(this.bug);
+        this.resetForm();
+    }
 
+    resetForm() {
         this._bugForm.reset({ status: 1, severity : 1 });
+        this.resetBug(); 
+    }
+
+    resetBug() {
+        this.bug = this.newBug();
     }
 }

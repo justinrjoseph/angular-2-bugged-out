@@ -24,7 +24,6 @@ export class BugListComponent implements OnInit {
                          .subscribe(
                              bug => {
                                  this._bugs.push(bug);
-                                 console.log(this._bugs);
                              },
                              error => {
                                  console.error('Unable to retrieve added bug: ', error)
